@@ -1,0 +1,14 @@
+<launch>
+
+  <arg name="suffix" default=""/>
+
+  <!-- Vehicle -->
+  <<!-- param name="robot_description" textfile="$(find turbot)/models/sparus.urdf" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher$(arg suffix)"/>
+ -->
+  <!-- Base to camera -->
+  <node pkg="tf" type="static_transform_publisher" name="base_to_camera$(arg suffix)" args="0.05.0 0.0 0.10 0.0 0.0 0 /base /camera 100" />
+
+  <!-- RViz transforms-->
+<!--   <node pkg="tf" type="static_transform_publisher" name="world_to_map$(arg suffix)" args="0.0 0.0 0.0 0.0 0.0 3.14159 /world /map 100" /> -->
+</launch>

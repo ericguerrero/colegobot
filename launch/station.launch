@@ -1,0 +1,34 @@
+<launch>
+	<!-- Params -->
+  <!-- Controler -->
+	<arg name="max_angular"   default="0.8"/>
+  <arg name="max_linear"    default="0.3"/>
+  <!-- Teleoperation -->
+  <arg name="joySerialPort"    default="/dev/input/js0"/>
+
+
+
+
+	<!-- Screen -->
+	<node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view"/>
+
+  <!-- Teleoperation -->
+  <include file="$(find ps3joy)/launch/ps3_robot.launch">
+  		<param name="scale_angular" value="$(arg max_angular)"/>
+	    <param name="scale_linear" value="$(arg max_linear)"/>
+	</include>
+
+<!-- ORB -->
+  <arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
+  <arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
+  <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
+
+
+  <!-- Transform -->
+  <node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
+  
+  <node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
+
+
+
+</launch>
