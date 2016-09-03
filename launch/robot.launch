@@ -5,17 +5,14 @@
   <arg name="color_mode"    default="mono8"/>
   <arg name="width"         default="320"/>
   <arg name="height"        default="240"/>
-  <!-- Teleoperation -->
-  <arg name="joySerialPort"    default="/dev/input/js0"/>
-
 
 
 
   <!-- Control -->
-  <include file="$(find ros_arduino_python)/launch/arduino.launch"/>
+  <include file="$(find colegobot)/launch/control.launch"/>
 
 	<!-- Camera -->
-	 <node machine="raspberry" pkg="rosberrypi_cam" name="rosberrypi_cam_node" type="rosberrypi_cam_node">
+	 <node pkg="rosberrypi_cam" name="rosberrypi_cam_node" type="rosberrypi_cam_node">
 	    <param name="fps"   		   value="$(arg fps)" />
 	    <param name="color_mode"   value="$(arg color_mode)" />
 	    <param name="width"   		 value="$(arg width)" />
@@ -23,23 +20,11 @@
 	 </node>
 
 
-  <!-- Teleoperation -->
-  <include file="$(find ps3joy)/launch/ps3_robot.launch">
-  		<param name="scale_angular" value="$(arg max_angular)"/>
-	    <param name="scale_linear" value="$(arg max_linear)"/>
-	</include>
 
 <!-- ORB -->
 <!--   <arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
   <arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
   <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/> -->
-
-
-  <!-- Transform -->
-  <node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
-  
-  <node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
-
 
 
 </launch>

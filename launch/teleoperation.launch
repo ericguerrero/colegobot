@@ -1,0 +1,32 @@
+<launch>
+  <arg name="max_linear"    default="0.8"/>
+	<arg name="max_angular"   default="0.3"/>
+  <arg name="axis_deadman"  default="10"/>
+  <arg name="axis_linear"   default="1"/>
+  <arg name="axis_angular"  default="0"/>
+  <arg name="serialPort"  default="/dev/input/js1"/>
+
+
+	<!-- JOY -->
+  <node pkg="joy" type="joy_node" name="ps3_joy" output="screen" >
+  	<param name="dev" type="string" value="$(arg serialPort)" />
+  	<param name="deadzone" value="0.12" />
+  </node>
+
+
+	<node pkg="turtlebot_teleop" type="turtlebot_teleop_joy" name="turtlebot_teleop_joystick"  output="screen">
+	    <param name="scale_angular" value="$(arg max_angular)"/>
+	    <param name="scale_linear" value="$(arg max_linear)"/>
+	    <param name="axis_deadman" value="$(arg axis_deadman)"/>
+	    <param name="axis_linear" value="$(arg axis_linear)"/>
+	    <param name="axis_angular" value="$(arg axis_angular)"/>
+	    <remap from="turtlebot_teleop_joystick/cmd_vel" to="cmd_vel"/>
+	</node>
+
+
+
+  	<node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+    	<!-- Load the file you made above -->
+    	<rosparam command="load" file="$(find ps3joy)/diagnostics.yaml" />
+  	</node>
+</launch>
