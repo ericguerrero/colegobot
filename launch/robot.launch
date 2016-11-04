@@ -1,32 +1,29 @@
 <launch>
-	<!-- Params -->
-  <!-- Camera -->
+  <!-- Settings -->
+  <arg name="enableCamera"        default="false"/>
+
+  <!-- Params -->
   <arg name="fps"           default="8"/>
   <arg name="color_mode"    default="mono8"/>
   <arg name="width"         default="320"/>
   <arg name="height"        default="240"/>
 
 
-
   <!-- Control -->
   <include file="$(find colegobot)/launch/control.launch"/>
 
-	<!-- Camera -->
-	 <node pkg="rosberrypi_cam" name="rosberrypi_cam_node" type="rosberrypi_cam_node">
-	    <param name="fps"   		   value="$(arg fps)" />
-	    <param name="color_mode"   value="$(arg color_mode)" />
-	    <param name="width"   		 value="$(arg width)" />
-	    <param name="height"   		 value="$(arg height)" />
+
+  <!-- Camera -->
+  <group if="$(arg enableCamera)">
+    <node pkg="rosberrypi_cam" name="rosberrypi_cam_node" type="rosberrypi_cam_node">
+      <param name="fps"          value="$(arg fps)" />
+      <param name="color_mode"   value="$(arg color_mode)" />
+      <param name="width"        value="$(arg width)" />
+      <param name="height"       value="$(arg height)" />
       <remap from="/rosberrypi_cam_node/image_raw" to="/camera/image_raw"/>
       <remap from="/rosberrypi_cam_node/camera_info" to="/camera/camera_info"/>
-	 </node>
-
-
-
-<!-- ORB -->
-<!--   <arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
-  <arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
-  <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/> -->
+    </node>
+  </group>
 
 
 </launch>

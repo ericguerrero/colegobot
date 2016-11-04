@@ -15,6 +15,7 @@
 	<!-- Teleoperation -->
 	<group if="$(arg enableTeleoperation)">
 		<include file="$(find colegobot)/launch/teleoperation.launch"/>
+		<arg name="serialPort"     value="$(arg teleopSerialPort)"/>
   	</group>
 
 	<!-- Camera -->

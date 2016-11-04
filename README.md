@@ -61,5 +61,14 @@ $ sudo bash
 $ rosrun ps3joy ps3joy.py
 ```
 
+In a new terminal, confirm that the joystick is sending data to your computer. You can test this with jstest:
+```
+$ sudo jstest /dev/input/js?
+```
+
 ## Launch architecture
 ### Station
+Add the correct serial port for teleoperation in the launch file and run.
+```
+$ roslaunch colegobot station.launch 
+```
