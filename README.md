@@ -9,16 +9,6 @@ https://github.com/stevenlovegrove/Pangolin.git
 
 
 
-
-
-
-
-
-
-
-
-
-
 ## Configure wifi network
 ### Set static IP
 ```
@@ -59,3 +49,15 @@ iface wlan0 inet dhcp
    wpa-ssid "Your Network SSID"
    wpa-psk "Your Password"
 ```
+
+
+## Teleoperation PS3joy
+### USB
+
+
+### Bluetooth
+$ sudo bash
+$ rosrun ps3joy ps3joy.py
+
+## Launch architecture
+### Station

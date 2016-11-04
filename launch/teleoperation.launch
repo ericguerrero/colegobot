@@ -4,12 +4,12 @@
   <arg name="axis_deadman"  default="10"/>
   <arg name="axis_linear"   default="1"/>
   <arg name="axis_angular"  default="0"/>
-  <arg name="serialPort"  default="/dev/input/js1"/>
+  <arg name="SerialPort"    default="/dev/input/js1"/>
 
 
 	<!-- JOY -->
   <node pkg="joy" type="joy_node" name="ps3_joy" output="screen" >
-  	<param name="dev" type="string" value="$(arg serialPort)" />
+  	<param name="dev" type="string" value="$(arg SerialPort)" />
   	<param name="deadzone" value="0.12" />
   </node>
 

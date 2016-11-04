@@ -1,23 +1,34 @@
 <launch>
+	<!-- Settings -->
+	<arg name="enableTeleoperation" 		default="true"/>
+	<arg name="enableCamera" 				default="false"/>
+	<arg name="enableORB" 					default="false"/>
 
-	<!-- Screen -->
-	<node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view"/>
-
-  <!-- Teleoperation -->
-  <include file="$(find colegobot)/launch/teleoperation.launch"/>
-
-
-<!-- ORB -->
-<arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
-<arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
-<node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
+	<!-- Params -->
+	<arg name="teleopSerialPort"    default="/dev/input/js1"/>
 
 
-<!-- Transform -->
-<node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
-  
-<node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
+	<!-- Frame transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
+	<node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
+
+	<!-- Teleoperation -->
+	<group if="$(arg enableTeleoperation)">
+		<include file="$(find colegobot)/launch/teleoperation.launch"/>
+  	</group>
+
+	<!-- Camera -->
+	<group if="$(arg enableCamera)">
+		<node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view"/>
+  	</group>
 
 
+
+	<!-- ORB -->
+	<group if="$(arg enableORB)">
+		<arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
+		<arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
+		<node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
+  	</group>
 
 </launch>
