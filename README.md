@@ -12,7 +12,7 @@ https://github.com/stevenlovegrove/Pangolin.git
 ## Configure wifi network
 ### Set static IP
 ```
-sudo vim /etc/dhcpcd.conf
+$ sudo vim /etc/dhcpcd.conf
 ```
 add the following
 
@@ -33,7 +33,7 @@ static domain_name_servers=192.168.0.1
 ### Configure wlan0
 
 ```
-sudo vim /etc/network/interfaces
+$ sudo vim /etc/network/interfaces
 ```
 add the following
 
@@ -56,8 +56,10 @@ iface wlan0 inet dhcp
 
 
 ### Bluetooth
+```
 $ sudo bash
 $ rosrun ps3joy ps3joy.py
+```
 
 ## Launch architecture
 ### Station
