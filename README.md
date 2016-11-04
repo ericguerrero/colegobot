@@ -1,5 +1,24 @@
 # colegobot
 
+## Dependencies
+cd workspace/src
+git clone https://github.com/ros-drivers/joystick_drivers.git
+https://github.com/turtlebot/turtlebot.git
+
+https://github.com/stevenlovegrove/Pangolin.git
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Configure wifi network
 ### Set static IP
 ```
@@ -19,6 +38,7 @@ interface wlan0
 static ip_address=192.168.0.10/24
 static routers=192.168.0.1
 static domain_name_servers=192.168.0.1
+```
 
 ### Configure wlan0
 

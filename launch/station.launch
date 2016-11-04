@@ -8,15 +8,15 @@
 
 
 <!-- ORB -->
-  <arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
-  <arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
-  <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
+<arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
+<arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
+<node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
 
 
-  <!-- Transform -->
-  <node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
+<!-- Transform -->
+<node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
   
-  <node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
+<node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
 
 
 
