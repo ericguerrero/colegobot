@@ -1,7 +1,7 @@
 <launch>
 	<!-- Settings -->
 	<arg name="enableTeleoperation" 		default="true"/>
-	<arg name="enableCamera" 				default="false"/>
+	<arg name="enableCamera" 				default="true"/>
 	<arg name="enableORB" 					default="false"/>
 
 	<!-- Params -->

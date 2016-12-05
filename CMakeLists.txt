@@ -7,6 +7,7 @@ find_package(catkin REQUIRED
   rospy
   tf
   std_msgs
+  nav_msgs
   geometry_msgs)
 
 catkin_package(CATKIN_DEPENDS
@@ -14,6 +15,7 @@ catkin_package(CATKIN_DEPENDS
   rospy
   tf
   std_msgs
+  nav_msgs
   geometry_msgs)
 
 
