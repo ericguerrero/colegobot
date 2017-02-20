@@ -1,16 +1,16 @@
 <launch>
 	<!-- Settings -->
 	<arg name="enableTeleoperation" 		default="true"/>
-	<arg name="enableCamera" 				default="true"/>
+	<arg name="enableImage" 				default="false"/>
 	<arg name="enableORB" 					default="false"/>
 
 	<!-- Params -->
 	<arg name="teleopSerialPort"    default="/dev/input/js1"/>
 
 
-	<!-- Frame transformations -->
+	<!-- Frame transformations 
 	<node pkg="tf" type="static_transform_publisher" name="base_to_camera" args="-0.05.0 0.0 -0.10 0.0 0.0 0 /camera /colegobot 100" />
-	<node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>
+	<node pkg="colegobot" type="pose_broadcaster" name="pose_broadcaster" output="screen"/>-->
 
 	<!-- Teleoperation -->
 	<group if="$(arg enableTeleoperation)">
@@ -19,16 +19,18 @@
   	</group>
 
 	<!-- Camera -->
-	<group if="$(arg enableCamera)">
+	<group if="$(arg enableImage)">
 		<node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view"/>
+		<remap from="/image" to="/camera/image_raw" />
+		<param name="autosize" value="true"/>
   	</group>
 
 
 
 	<!-- ORB -->
 	<group if="$(arg enableORB)">
-		<arg name="vocabualry" default="/home/eric/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt"/> 
-		<arg name="settings"   default="/home/eric/catkin_ws/src/ORB_SLAM2/Examples/Monocular/default.yaml"/> 
+		<arg name="vocabualry" default="/home/eric/catkin_ws/src/orb_slam2/Vocabulary/ORBvoc.txt"/> 
+		<arg name="settings"   default="/home/eric/catkin_ws/src/orb_slam2/Examples/Monocular/default.yaml"/> 
 		<node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Mono" args="$(arg vocabualry) $(arg settings)"  output="screen"/>
   	</group>
 

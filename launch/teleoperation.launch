@@ -1,6 +1,6 @@
 <launch>
-  <arg name="max_linear"    default="0.8"/>
-	<arg name="max_angular"   default="0.3"/>
+  <arg name="max_linear"    default="0.3"/>
+	<arg name="max_angular"   default="0.25"/>
   <arg name="axis_deadman"  default="10"/>
   <arg name="axis_linear"   default="1"/>
   <arg name="axis_angular"  default="0"/>
